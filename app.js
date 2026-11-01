@@ -38,7 +38,7 @@
 
   // 3. Demo
   const sel = $("tenant");
-  sel.innerHTML = D.tenants.map(t => `<option value="${t.id}">${esc(t.name)} , ${esc(t.city)}</option>`).join("");
+  sel.innerHTML = D.tenants.map(t => `<option value="${t.id}">${esc(t.name)}, ${esc(t.city)}</option>`).join("");
   const tot = (m, t) => (D.values[m].total.find(r => r.tenant_id === t) || {}).value;
   const name = t => D.tenants.find(x => x.id === t).name;
   const QS = ["How much booked revenue did Broccoli bring in July?", "How many missed calls did we have?",

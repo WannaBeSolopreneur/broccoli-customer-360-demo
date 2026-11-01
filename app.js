@@ -67,12 +67,19 @@
   sel.addEventListener("change", draw);
   draw();
 
-  // How it's built
-  $("built").innerHTML = `<ul>
-    <li>${D.run.raw_rows.toLocaleString("en-US")} fake rows for ${D.tenants.length} contractors: calls, web leads, jobs, invoices and support tickets.</li>
-    <li>Python and ClickHouse. Records are matched on cleaned up phone, email, name and address.</li>
-    <li>Each contractor can only read its own rows. A test checks this.</li>
-    <li>${D.run.tests_passed} tests pass. The whole build runs in ${Math.round(D.run.make_all_sec)} seconds.</li>
-    <li>The questions above use simple keyword matching. No paid AI.</li>
-    <li>Code available on request.</li></ul>`;
+  // Technical tags. Numbers come from data.json.
+  const R0 = D.run, E = D.er, f1 = (x, d) => (x * 100).toFixed(d) + "%";
+  const tags = (id, list) => $(id).innerHTML = list.map(x => `<li>${esc(x)}</li>`).join("");
+  tags("tags1", ["No shared key across sources", "Identity fragmentation", "5 sources: calls, web leads, jobs, invoices, tickets"]);
+  tags("tags2", ["Entity resolution", "Exact + fuzzy SQL match rules", "Blocking on house number",
+    "Jaro-Winkler + n-gram distance", "Household phone guard", `Connected components (label propagation, ${R0.er_rounds} rounds)`,
+    "Golden record with stable customer_key", `Precision ${f1(E.precision, 1)} / recall ${f1(E.recall, 1)} / F1 ${E.f1.toFixed(3)} on labeled ground truth`]);
+  tags("tags3", ["Multi-tenant ClickHouse", `Row-level security with row policies (${R0.policy_ok}/${R0.policy_checks} checks pass)`,
+    `Semantic layer: metrics.yml, ${R0.metrics} governed metrics`, `Peer benchmarks with k-anonymity (min ${R0.min_tenants} tenants)`,
+    "Questions map to metrics by keyword. No LLM."]);
+  tags("stack", ["ClickHouse (chDB)", "Python", "SQL models: raw, staging, intermediate, marts", `dim_customer + ${R0.fact_tables} fact tables`,
+    "Idempotent lead ingestion API (OpenAPI 3.1, dedupe on externalLeadId)",
+    `${R0.quality_passed}/${R0.quality_total} data quality checks: freshness, not null, unique, accepted values, relationships, reconciliation`,
+    `${R0.tests_passed} tests pass`, `Full rebuild in ${Math.round(R0.make_all_sec)} sec`, `${R0.raw_rows.toLocaleString("en-US")} synthetic rows, ${D.tenants.length} tenants`,
+    "Code available on request"]);
 })();

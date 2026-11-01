@@ -4,6 +4,6 @@ A short one page demo built by Asad Moulvi for Broccoli's Founding Data Engineer
 
 All data is synthetic. Phones use 555 numbers and emails use example domains. No real customers.
 
-This repo holds only the built static site. The numbers in `data.json` were exported from a ClickHouse (chDB) warehouse build. The source code is in a private repo and is available on request.
+This repo holds only the built static site. The numbers in `data.json` were exported from a ClickHouse (chDB) warehouse build. The source code is public: https://github.com/WannaBeSolopreneur/broccoli-customer-360
 
 Live site: https://wannabesolopreneur.github.io/broccoli-customer-360-demo/

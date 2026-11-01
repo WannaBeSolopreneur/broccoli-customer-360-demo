@@ -87,6 +87,5 @@
   tags("stack", ["ClickHouse (chDB)", "Python", "SQL models: raw, staging, intermediate, marts", `dim_customer + ${R0.fact_tables} fact tables`,
     "Idempotent lead ingestion API (OpenAPI 3.1, dedupe on externalLeadId)",
     `${R0.quality_passed}/${R0.quality_total} data quality checks: freshness, not null, unique, accepted values, relationships, reconciliation`,
-    `${R0.tests_passed} tests pass`, `Full rebuild in ${Math.round(R0.make_all_sec)} sec`, `${R0.raw_rows.toLocaleString("en-US")} synthetic rows, ${D.tenants.length} tenants`,
-    "Code available on request"]);
+    `${R0.tests_passed} tests pass`, `Full rebuild in ${Math.round(R0.make_all_sec)} sec`, `${R0.raw_rows.toLocaleString("en-US")} synthetic rows, ${D.tenants.length} tenants`]);
 })();

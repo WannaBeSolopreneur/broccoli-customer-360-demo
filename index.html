@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer 360 for home service contractors | Asad Moulvi</title>
+<meta name="description" content="A working Customer 360 demo for home service contractors, built by Asad Moulvi for Broccoli's Founding Data Engineer role. All data is synthetic.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Demo for Broccoli AI</p>
+    <h1>Customer 360 for home service contractors</h1>
+    <p class="lede">Built by Asad Moulvi for Broccoli's Founding Data Engineer role. All data is synthetic.</p>
+    <div class="links">
+      <a class="btn" href="https://www.linkedin.com/in/asad-moulvi-aaa278175" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/WannaBeSolopreneur" target="_blank" rel="noopener">GitHub profile</a>
+      <span class="note">Code available on request</span>
+    </div>
+    <div class="facts" id="facts"></div>
+  </div>
+</header>
+
+<nav class="tabs" id="nav">
+  <div class="wrap">
+    <a href="#overview">Overview</a><a href="#benchmark">Peers</a><a href="#er">Matching</a><a href="#leads">Leads</a><a href="#ask">Ask</a><a href="#built">How it works</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="picker card" aria-label="Pick a contractor">
+    <label for="tenant">You are signed in as</label>
+    <select id="tenant"></select>
+    <p class="hint" id="isolation"></p>
+  </section>
+
+  <section id="overview">
+    <h2>How this contractor is doing</h2>
+    <p class="sub">12 months, October 2025 to September 2026. Tap a card to see its monthly trend.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="card">
+      <div class="row-between"><h3 id="trend-title">Trend</h3><span class="pill" id="trend-metric"></span></div>
+      <div id="trend" class="chart"></div>
+      <p class="def" id="trend-def"></p>
+    </div>
+  </section>
+
+  <section id="benchmark">
+    <h2>Compared with peers</h2>
+    <p class="sub">This contractor against the median of all contractors. Peers only see totals, never another contractor's own numbers. A peer group needs at least <b id="kmin"></b> contractors, or nothing is shown.</p>
+    <div class="card" id="bench"></div>
+  </section>
+
+  <section id="er">
+    <h2>One homeowner, one customer</h2>
+    <p class="sub">Calls, leads, jobs, invoices and tickets each keep their own copy of a homeowner. Names have typos and phones come in many formats. Matching joins them into one customer.</p>
+    <div class="scores" id="scores"></div>
+    <div class="card">
+      <div class="search">
+        <label for="q-cust">Find a customer at this contractor</label>
+        <input id="q-cust" type="search" placeholder="Type a name, like Silva" autocomplete="off">
+      </div>
+      <div class="chips" id="cust-list"></div>
+      <div id="cust"></div>
+    </div>
+    <details class="card">
+      <summary>What each matching rule adds</summary>
+      <div id="ablation"></div>
+    </details>
+  </section>
+
+  <section id="leads">
+    <h2>Lead conversion: id only vs matched</h2>
+    <p class="sub">How many leads turned into a booked job within 14 days. Counting only jobs that carry the lead id misses many. Matching finds the rest.</p>
+    <div class="card">
+      <div class="bigcompare" id="lead-big"></div>
+      <div id="lead-chart" class="chart"></div>
+      <p class="def">Part of this gap is by design. The data generator keeps the lead id on only 60% of jobs that came from a lead. This view shows all contractors, as Broccoli staff would see it.</p>
+    </div>
+  </section>
+
+  <section id="ask">
+    <h2>Ask a question</h2>
+    <p class="sub">Plain English in, one metric out. It uses keyword matching, not a paid AI model. Every answer names the metric definition it used.</p>
+    <div class="card">
+      <form id="ask-form" class="askbar">
+        <input id="ask-q" type="text" placeholder="For example: how many missed calls did we have?" autocomplete="off" aria-label="Your question">
+        <button class="btn" type="submit">Ask</button>
+      </form>
+      <div class="chips" id="ask-chips"></div>
+      <div id="ask-out"></div>
+    </div>
+  </section>
+
+  <section id="built">
+    <h2>How it works</h2>
+    <div class="grid2">
+      <div class="card">
+        <ul class="steps">
+          <li><b>Raw data.</b> Five made up sources per contractor: calls and texts, API leads, ServiceTitan style jobs, invoices and support tickets.</li>
+          <li><b>Warehouse.</b> ClickHouse, run in Python with chDB. SQL models in layers: raw, staging, matching, marts, metrics.</li>
+          <li><b>Matching.</b> SQL rules on phone, email, system ids and fuzzy name plus address. Groups form by label propagation. Keys stay stable between runs.</li>
+          <li><b>One metric file.</b> Every number on this page is compiled from one file of metric definitions.</li>
+          <li><b>Isolation.</b> Row policies on a real ClickHouse server. Each contractor login sees only its own rows.</li>
+          <li><b>Tests.</b> One command builds it all and checks it.</li>
+        </ul>
+        <div class="facts small" id="runfacts"></div>
+      </div>
+      <figure class="card arch">
+        <img src="architecture.png" alt="Architecture diagram: sources flow into raw, staging, entity resolution, marts, metrics and the tenant API" loading="lazy">
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Built by Asad Moulvi. All data is synthetic. Phones use 555 numbers and emails use example domains. No real customers.</p>
+    <p><a href="https://www.linkedin.com/in/asad-moulvi-aaa278175" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/WannaBeSolopreneur" target="_blank" rel="noopener">GitHub</a> · Code available on request</p>
+  </div>
+</footer>
+<script src="ask.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

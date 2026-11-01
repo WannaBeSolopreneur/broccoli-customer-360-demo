@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Is the AI making this contractor money? A demo by Asad Moulvi</title>
+<title>Revenue attribution for Broccoli. A demo by Asad Moulvi</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <p class="eyebrow">A short demo for Broccoli AI</p>
-    <h1>Is the AI making this contractor money?</h1>
+    <h1>Revenue attribution for Broccoli: which AI calls turned into paid jobs?</h1>
+    <p class="sub">Tie every booked job and dollar back to the AI call or lead that started it.</p>
     <p class="by">By Asad Moulvi</p>
   </div>
 </header>
@@ -19,9 +20,9 @@
 <main class="wrap">
   <section id="problem">
     <p class="step">1. The problem</p>
-    <h2>One homeowner looks like three people</h2>
-    <p>A contractor wants to know if Broccoli's AI is making them money.</p>
-    <p>But the same homeowner shows up with a different name or phone in each system. So you can't link a lead to the job and the money it led to.</p>
+    <h2>Attribution breaks without a shared customer ID</h2>
+    <p>Calls, leads, jobs and invoices live in different systems. They have no shared customer ID.</p>
+    <p>So one homeowner looks like three people, and the money can't be traced back to the AI.</p>
     <div class="cards" id="messy"></div>
     <p class="note">Same person. Three systems. No shared ID.</p>
     <ul class="tags" id="tags1"></ul>
@@ -29,8 +30,8 @@
 
   <section id="solution">
     <p class="step">2. The solution</p>
-    <h2>Match them into one customer</h2>
-    <p>I match the records into one customer. Then I count the results for each contractor.</p>
+    <h2>Match the records, then follow the money</h2>
+    <p>I match the records into one customer. That makes attribution accurate.</p>
     <div id="merged"></div>
     <p class="note" id="er-line"></p>
     <ul class="tags" id="tags2"></ul>
@@ -43,6 +44,7 @@
       <label class="pick"><span>Contractor</span><select id="tenant"></select></label>
       <p class="iso" id="iso"></p>
       <div class="nums" id="nums"></div>
+      <p class="rule" id="rule"></p>
       <p class="qhead">Ask a question</p>
       <div class="chips" id="chips"></div>
       <div class="answer" id="answer" aria-live="polite"></div>
@@ -63,10 +65,10 @@
     </div>
   </section>
 
-  <section id="built" class="builtsec">
-    <p class="step">How it's built</p>
+  <details class="built">
+    <summary>How it's built</summary>
     <ul class="tags stack" id="stack"></ul>
-  </section>
+  </details>
 </main>
 
 <footer class="wrap foot">All data is synthetic. No real customers. Phone numbers use 555 and emails use example domains.</footer>

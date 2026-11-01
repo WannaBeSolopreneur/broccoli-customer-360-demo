@@ -1,6 +1,6 @@
 # Customer 360 demo for home service contractors
 
-A click around demo built by Asad Moulvi for Broccoli's Founding Data Engineer role.
+A short one page demo built by Asad Moulvi for Broccoli's Founding Data Engineer role.
 
 All data is synthetic. Phones use 555 numbers and emails use example domains. No real customers.
 
